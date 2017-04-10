@@ -1,7 +1,5 @@
 package com.rizk.androidclasscontacts;
 
-import java.util.Random;
-
 /**
  * Created by rizk on 4/9/17.
  */
@@ -9,15 +7,14 @@ import java.util.Random;
 public class Contact {
 
     private String name;
-    private int id;
-    private String phoneNumber;
-    private static final Random ID_GENERATOR = new Random();
+    private long id;
+    private int phoneNumber;
 
-    public static Contact create(String name, String digits) {
+    public static Contact create(long id, String name, int digits) {
         Contact contact = new Contact();
         contact.name = name;
         contact.phoneNumber = digits;
-        contact.id = ID_GENERATOR.nextInt();
+        contact.id = id;
         return contact;
     }
 
@@ -25,10 +22,7 @@ public class Contact {
         return name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
-
-
-
 }
