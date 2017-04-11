@@ -7,13 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView contactRecyclerView;
+    private ContactsDBController contactsDataController;
+    private ContactsAdapter contactsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        contactsDataController = new ContactsDBController(this);
+        contactRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        contactsAdapter = new ContactsAdapter();
+        contactRecyclerView.setAdapter(contactsAdapter);
+        contactRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -30,10 +38,20 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
 
-        contactRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        contactRecyclerView.setAdapter(new ContactsAdapter());
-        contactRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        contactsDataController.open();
+        contactsAdapter.setContactsList(contactsDataController.getAllContacts());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        contactsDataController.close();
     }
 
     @Override

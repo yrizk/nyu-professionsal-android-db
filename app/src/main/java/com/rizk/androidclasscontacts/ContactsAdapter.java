@@ -6,12 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 /**
  * Created by rizk on 4/10/17.
  */
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactViewHolder> {
 
-    private String[] data = new String[]{"this", "is", "some", "data", "that", "should", "serve", "as", "dummy"};
+    List<Contact> contactsList;
+
 
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -19,30 +22,39 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
         return new ContactViewHolder(rowView);
     }
 
+    public void setContactsList(List<Contact> list) {
+        this.contactsList = list;
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(ContactViewHolder holder, int position) {
-        holder.bind(data[position % (data.length - 1)], null);
+        holder.bind(contactsList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return data.length * 2;
+        return contactsList.size();
     }
 
     class ContactViewHolder extends RecyclerView.ViewHolder {
-        protected TextView textView;
+        private TextView nameView;
+        private TextView phoneNoView;
+
 
         public ContactViewHolder(View view) {
             super(view);
-            this.textView = (TextView) view.findViewById(R.id.title);
+            this.nameView = (TextView) view.findViewById(R.id.title);
+            this.phoneNoView = (TextView) view.findViewById(R.id.phone_number);
         }
 
-        void bind(String name, String phoneNumber) {
-            textView.setText(name);
+        void bind(Contact contact) {
+            nameView.setText(contact.getName());
+            phoneNoView.setText(contact.getFormattedDigits());
         }
 
         void unbind() {
-            textView.setText("");
+            nameView.setText("");
         }
     }
 }
