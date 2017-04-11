@@ -7,7 +7,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
@@ -65,16 +64,8 @@ public class ContactsDBController {
     }
 
     public List<Contact> getAllContacts() {
-        // todo let them fill this in
-        List<Contact> contacts = new ArrayList<>();
-        Cursor cursor = database.query(ContactsDBHelper.CONTACTS_TABLE, ALL_COLUMNS, null, null, null, null, null); // refer to the other call for documentation.
-        cursor.moveToFirst();
-        while(!cursor.isAfterLast()) {
-            Contact c = convertToContact(cursor);
-            contacts.add(c);
-            cursor.moveToNext();
-        }
-        return contacts;
+        //todo implement
+        throw new UnsupportedOperationException("Please Implement this");
     }
 
     private Contact convertToContact(Cursor cursor) {

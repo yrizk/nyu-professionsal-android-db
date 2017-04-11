@@ -38,7 +38,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
     private final static String CREATE_STATEMENT = "CREATE TABLE " + CONTACTS_TABLE + "( "
             + COLUMN_ID + " integer primary key autoincrement, "
             + COLUMN_NAME + " text not null, "
-            + COLUMN_PHONE + " text not null);"; //todo make this an exercise.
+            + COLUMN_PHONE + " integer not null);";
 
     private static boolean FIRST_TIME_INSERTION = true;
 
