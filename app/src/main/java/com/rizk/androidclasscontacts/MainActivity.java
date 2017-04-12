@@ -27,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
         contactsDataController = new ContactsDBController(this);
         contactRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         contactsAdapter = new ContactsAdapter();
-        contactRecyclerView.setAdapter(contactsAdapter);
-        contactRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         contactsDataController.open();
         contactsAdapter.setContactsList(contactsDataController.getAllContacts());
+        contactRecyclerView.setAdapter(contactsAdapter);
+        contactRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
     }
 
     @Override

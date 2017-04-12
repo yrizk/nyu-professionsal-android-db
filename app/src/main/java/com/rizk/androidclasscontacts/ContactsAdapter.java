@@ -44,17 +44,13 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
         public ContactViewHolder(View view) {
             super(view);
-            this.nameView = (TextView) view.findViewById(R.id.title);
+            this.nameView = (TextView) view.findViewById(R.id.contact_name);
             this.phoneNoView = (TextView) view.findViewById(R.id.phone_number);
         }
 
         void bind(Contact contact) {
             nameView.setText(contact.getName());
             phoneNoView.setText(contact.getFormattedDigits());
-        }
-
-        void unbind() {
-            nameView.setText("");
         }
     }
 }

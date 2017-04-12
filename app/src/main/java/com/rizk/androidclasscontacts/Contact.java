@@ -1,6 +1,6 @@
 package com.rizk.androidclasscontacts;
 
-import android.text.TextUtils;
+import android.util.Log;
 
 /**
  * Created by rizk on 4/9/17.
@@ -13,13 +13,11 @@ public class Contact {
     private long digits;
 
 
-    public static Contact create(long id, String name, long digits) {
+    public static Contact create(long id, String name, String digits) {
+        Log.d("Contact", "name: " + name + " digits: " + digits);
         Contact contact = new Contact();
-        if (id < 0 || TextUtils.isEmpty(name) || digits < 1_000_000_000) {
-            throw new IllegalArgumentException("bad arguments for contact");
-        }
         contact.name = name;
-        contact.digits = digits;
+        contact.digits = Long.valueOf(digits);
         contact.id = id;
         return contact;
     }

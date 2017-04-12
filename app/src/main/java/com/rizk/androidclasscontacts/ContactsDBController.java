@@ -65,7 +65,6 @@ public class ContactsDBController {
     }
 
     public List<Contact> getAllContacts() {
-        // todo let them fill this in
         List<Contact> contacts = new ArrayList<>();
         Cursor cursor = database.query(ContactsDBHelper.CONTACTS_TABLE, ALL_COLUMNS, null, null, null, null, null); // refer to the other call for documentation.
         cursor.moveToFirst();
@@ -79,6 +78,6 @@ public class ContactsDBController {
 
     private Contact convertToContact(Cursor cursor) {
         // note the order and type that I am extracting here is completely relevant.
-        return Contact.create(cursor.getLong(0), cursor.getString(1), cursor.getInt(2));
+        return Contact.create(cursor.getLong(0), cursor.getString(1), cursor.getString(2));
     }
 }
